@@ -1,0 +1,54 @@
+{
+  "name": "j4d",
+  "description": "j4dd",
+  "version": "0.1.0",
+  "author": "Marcel Tabara <marcel.tabara@gmail.com>",
+  "dependencies": {
+    "@material-ui/core": "^4.11.2",
+    "@material-ui/icons": "^4.11.2",
+    "@material-ui/lab": "^4.0.0-alpha.57",
+    "@reach/router": "^1.3.4",
+    "babel-plugin-styled-components": "^1.12.0",
+    "classnames": "^2.2.6",
+    "gatsby": "^2.30.1",
+    "gatsby-image": "^2.9.0",
+    "gatsby-plugin-manifest": "^2.10.0",
+    "gatsby-plugin-offline": "^3.8.0",
+    "gatsby-plugin-react-helmet": "^3.8.0",
+    "gatsby-plugin-sass": "^3.0.0",
+    "gatsby-plugin-sharp": "^2.12.0",
+    "gatsby-plugin-styled-components": "^3.8.0",
+    "gatsby-source-filesystem": "^2.9.0",
+    "gatsby-source-mongodb": "^2.8.0",
+    "gatsby-transformer-sharp": "^2.10.0",
+    "griding": "^0.5.0",
+    "lodash.kebabcase": "^4.1.1",
+    "prop-types": "^15.7.2",
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1",
+    "react-helmet": "^6.1.0",
+    "react-markdown": "^5.0.3",
+    "sass": "^1.32.2",
+    "styled-components": "^5.2.1",
+    "typography": "^0.16.19",
+    "typography-theme-moraga": "^0.16.19"
+  },
+  "devDependencies": {
+    "gatsby-remark-images": "^3.9.0",
+    "gatsby-transformer-remark": "^2.14.0",
+    "prettier": "^2.2.1"
+  },
+  "keywords": [
+    "gatsby"
+  ],
+  "license": "MIT",
+  "scripts": {
+    "build": "gatsby build",
+    "now-build": "npm run build",
+    "develop": "gatsby develop",
+    "dev": "npm run develop",
+    "format": "prettier --write 'src/**/*.+(ts|tsx|js|jsx|json|yml|yaml|md|mdx)'",
+    "start": "npm run develop",
+    "serve": "gatsby serve"
+  }
+}
