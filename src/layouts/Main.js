@@ -3,7 +3,6 @@ import { graphql, navigate, StaticQuery } from "gatsby"
 import { Provider as GridProvider } from "griding"
 import React from "react"
 import bgImage from "../assets/img/prog-5.jpg"
-import logo from "../assets/img/reactlogo.png"
 import styles from "../assets/jss/material-dashboard-react/layouts/adminStyle.js"
 import Navbar from "../components/Navbar"
 import Sidebar from "../components/Sidebar"
@@ -65,7 +64,7 @@ const Main = ({ children }) => {
             <div className={classes.wrapper}>
               <Sidebar
                 logoText={"just 4 dev"}
-                logo={logo}
+                //logo={logo}
                 image={bgImage}
                 handleDrawerToggle={handleDrawerToggle}
                 open={mobileOpen}
