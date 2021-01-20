@@ -1,5 +1,3 @@
-import { graphql } from "gatsby"
-import { Row } from "griding"
 import React from "react"
 import { Container } from "../components/grid"
 import Pagination from "../components/pagination"
@@ -7,19 +5,17 @@ import renderList from "../components/renderList"
 import Seo from "../components/seo"
 import Main from "./Main"
 
-const BlogCategory = ({ data, pageContext }) => {
-  const { allMongodbJ4DadminPosts } = data
-  const { currentPage, numPages, category } = pageContext
+const BlogCategory = ({ pageContext }) => {
+  const { currentPage, numPages, category, categories, posts } = pageContext
 
   return (
-    <Main>
+    <Main categories={categories}>
       <Seo title={category} />
 
       <Container>
-        <Row>
-          <h1>{category}</h1>
-          {allMongodbJ4DadminPosts.edges.map(renderList)}
-        </Row>
+        <h1>{category}</h1>
+
+        {posts.map(renderList)}
 
         <Pagination
           currentPage={currentPage}
@@ -32,30 +28,3 @@ const BlogCategory = ({ data, pageContext }) => {
 }
 
 export default BlogCategory
-
-export const query = graphql`
-  query blogPostsListByCategory($category: String, $skip: Int!, $limit: Int!) {
-    allMongodbJ4DadminPosts(
-      sort: { fields: [datetime], order: DESC }
-      filter: { category: { in: [$category] } }
-      limit: $limit
-      skip: $skip
-    ) {
-      edges {
-        node {
-          id
-          title
-          category
-          subcategory
-          shortDescription
-          postMetaCharSet
-          postMetaKeywords {
-            name
-          }
-          datetime(formatString: "MMMM DD, YYYY")
-          slug
-        }
-      }
-    }
-  }
-`

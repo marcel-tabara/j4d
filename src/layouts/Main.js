@@ -63,7 +63,7 @@ const Main = ({ children }) => {
           <GridProvider>
             <div className={classes.wrapper}>
               <Sidebar
-                logoText={"just 4 dev"}
+                logoText={"just 4 dev blog"}
                 //logo={logo}
                 image={bgImage}
                 handleDrawerToggle={handleDrawerToggle}

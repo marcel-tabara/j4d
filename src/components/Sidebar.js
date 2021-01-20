@@ -16,7 +16,7 @@ const Sidebar = (props) => {
 
   const {
     color,
-    logo,
+    //logo,
     image,
     logoText,
     categories = [],
@@ -36,9 +36,9 @@ const Sidebar = (props) => {
         target="_blank"
         rel="noreferrer"
       >
-        <div className={classes.logoImage}>
+        {/* <div className={classes.logoImage}>
           <img src={logo} alt="logo" className={classes.img} />
-        </div>
+        </div> */}
         {logoText}
       </a>
     </div>
@@ -85,7 +85,6 @@ const Sidebar = (props) => {
           key={`all_posts_text}`}
           onClick={() => onClick({ text: "" })}
         />
-        All Posts
       </ListItem>
       {cats.map((cat, i) => {
         let listItemClasses = null

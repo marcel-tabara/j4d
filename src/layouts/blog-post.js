@@ -1,5 +1,6 @@
 import { graphql, Link } from "gatsby"
 import { Cell, Row } from "griding"
+// import { MDXRenderer } from "gatsby-plugin-mdx"
 import React from "react"
 import ReactMarkdownWithHtml from "react-markdown/with-html"
 import { Container } from "../components/grid"
@@ -10,12 +11,11 @@ import Main from "./Main"
 class BlogPostTemplate extends React.Component {
   render() {
     const post = this.props.data.mongodbJ4DadminPosts
-    //const siteTitle = this.props.data.site.siteMetadata.title
-    const { prev, next } = this.props.pageContext
+    const { prev, next, categories } = this.props.pageContext
 
     return (
-      <Main>
-        <SEO title={post.title} description={post.shortDescription} />
+      <Main categories={categories}>
+        <SEO title={post.title} description={post.description} />
         <Container>
           <S.Title>{post.title}</S.Title>
           <S.Category>
@@ -25,12 +25,15 @@ class BlogPostTemplate extends React.Component {
               {post.subcategory}
             </Link>
           </S.Category>
-          <p style={{ justifyContent: "flex-end" }}>
-            <S.DateText>{post.datetime}</S.DateText>
-          </p>
+          <div style={{ justifyContent: "flex-end" }}>
+            <S.DateText>{post.created}</S.DateText>
+          </div>
           <hr />
           <S.BlogContent>
-            <ReactMarkdownWithHtml children={post.content} allowDangerousHtml />
+            <ReactMarkdownWithHtml
+              children={post.markdown}
+              allowDangerousHtml
+            />
           </S.BlogContent>
           <Row>
             {prev && (
@@ -76,21 +79,12 @@ export const pageQuery = graphql`
     mongodbJ4DadminPosts(slug: { eq: $slug }) {
       id
       title
-      content
+      markdown
       category
       subcategory
-      postMetaCharSet
-      postMetaKeywords {
-        name
-      }
-      datetime(formatString: "MMMM DD, YYYY")
+      created(formatString: "MMMM DD, YYYY")
       slug
-      shortDescription
-    }
-    site {
-      siteMetadata {
-        title
-      }
+      description
     }
   }
 `
