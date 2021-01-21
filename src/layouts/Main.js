@@ -73,10 +73,7 @@ const Main = ({ children }) => {
                 onClick={onClick}
               />
               <div className={classes.mainPanel}>
-                <Navbar
-                  //routes={}
-                  handleDrawerToggle={handleDrawerToggle}
-                />
+                <Navbar handleDrawerToggle={handleDrawerToggle} />
                 <div className={classes.content}>{children}</div>
               </div>
             </div>

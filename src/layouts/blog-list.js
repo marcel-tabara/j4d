@@ -5,6 +5,7 @@ import Breadcrumb from "../components/Breadcrumb"
 import Card from "../components/Card/Card.js"
 import CardBody from "../components/Card/CardBody.js"
 import CardHeader from "../components/Card/CardHeader.js"
+import { Container } from "../components/grid"
 import Pagination from "../components/pagination"
 import SEO from "../components/seo"
 import Main from "./Main"
@@ -73,31 +74,33 @@ const IndexPage = (props) => {
           } = post.node
 
           return (
-            <Card key={id}>
-              <CardHeader color="primary">
-                <Link
-                  style={{ boxShadow: `none`, textDecoration: "none" }}
-                  to={`${category}/${subcategory}/${slug}`}
-                >
-                  <h4 className={classes.cardTitleWhite}>{title}</h4>
-                </Link>
-                <div>{created}</div>
-                <Breadcrumb
-                  category={category}
-                  subcategory={subcategory}
-                  categories={categories}
-                />
-              </CardHeader>
-              <CardBody>
-                <div>
-                  <p
-                    dangerouslySetInnerHTML={{
-                      __html: description,
-                    }}
+            <Container>
+              <Card key={id}>
+                <CardHeader color="primary">
+                  <Link
+                    style={{ boxShadow: `none`, textDecoration: "none" }}
+                    to={`/blog/${category}/${subcategory}/${slug}`}
+                  >
+                    <h4 className={classes.cardTitleWhite}>{title}</h4>
+                  </Link>
+                  <div>{created}</div>
+                  <Breadcrumb
+                    category={category}
+                    subcategory={subcategory}
+                    categories={categories}
                   />
-                </div>
-              </CardBody>
-            </Card>
+                </CardHeader>
+                <CardBody>
+                  <div>
+                    <p
+                      dangerouslySetInnerHTML={{
+                        __html: description,
+                      }}
+                    />
+                  </div>
+                </CardBody>
+              </Card>
+            </Container>
           )
         })}
         <Pagination
