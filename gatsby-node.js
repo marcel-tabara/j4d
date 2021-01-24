@@ -253,9 +253,11 @@ exports.createPages = ({ graphql, actions: { createPage } }) => {
           "/" +
           post.node.slug,
         component: blogLayout,
+        posts,
         context: {
           category: post.node.category,
           subcategory: post.node.subcategory,
+          posts,
           slug: post.node.slug,
           prev: prev,
           next: next,
@@ -268,9 +270,8 @@ exports.createPages = ({ graphql, actions: { createPage } }) => {
       prev[curr] = (prev[curr] || 0) + 1
       return prev
     }, {})
-    const allCategories = Object.keys(countCategories)
 
-    allCategories.map((cat, i) => {
+    categories.map((cat, i) => {
       const link = `/blog/${cat}`
 
       Array.from({
