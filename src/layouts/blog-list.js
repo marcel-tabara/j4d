@@ -5,10 +5,10 @@ import Breadcrumb from "../components/Breadcrumb"
 import Card from "../components/Card/Card.js"
 import CardBody from "../components/Card/CardBody.js"
 import CardHeader from "../components/Card/CardHeader.js"
-import { Container } from "../components/grid"
 import Pagination from "../components/pagination"
 import SEO from "../components/seo"
 import Main from "./Main"
+import * as S from "../components/styles.css"
 
 const styles = {
   typo: {
@@ -45,24 +45,23 @@ const styles = {
     fontFamily: "'Roboto', 'Helvetica', 'Arial', sans-serif",
     marginBottom: "3px",
     textDecoration: "none",
+    fontSize: "1.2rem",
   },
 }
 
 const useStyles = makeStyles(styles)
 
-const IndexPage = (props) => {
+const IndexPage = ({
+  pageContext: { categories, posts, currentPage, numPages, skip, limit },
+}) => {
   const classes = useStyles()
-
-  const {
-    pageContext: { categories, posts, currentPage, numPages },
-  } = props
 
   return (
     <Main categories={categories}>
       <SEO title="All posts" />
 
       <div style={{ margin: "20px 0 40px" }}>
-        {posts.map((post) => {
+        {posts.slice(skip, skip + limit).map((post) => {
           const {
             id,
             title,
@@ -74,33 +73,33 @@ const IndexPage = (props) => {
           } = post.node
 
           return (
-            <Container>
-              <Card key={id}>
-                <CardHeader color="primary">
-                  <Link
-                    style={{ boxShadow: `none`, textDecoration: "none" }}
-                    to={`/blog/${category}/${subcategory}/${slug}`}
-                  >
-                    <h4 className={classes.cardTitleWhite}>{title}</h4>
-                  </Link>
-                  <div>{created}</div>
+            <Card key={id}>
+              <CardHeader color="primary">
+                <Link
+                  style={{ boxShadow: `none`, textDecoration: "none" }}
+                  to={`/blog/${category}/${subcategory}/${slug}`}
+                >
+                  <h2 className={classes.cardTitleWhite}>{title}</h2>
+                </Link>
+                <div className="twoCol">
                   <Breadcrumb
                     category={category}
                     subcategory={subcategory}
                     categories={categories}
                   />
-                </CardHeader>
-                <CardBody>
-                  <div>
-                    <p
-                      dangerouslySetInnerHTML={{
-                        __html: description,
-                      }}
-                    />
-                  </div>
-                </CardBody>
-              </Card>
-            </Container>
+                  <S.DateText>{created}</S.DateText>
+                </div>
+              </CardHeader>
+              <CardBody>
+                <div>
+                  <p
+                    dangerouslySetInnerHTML={{
+                      __html: description,
+                    }}
+                  />
+                </div>
+              </CardBody>
+            </Card>
           )
         })}
         <Pagination

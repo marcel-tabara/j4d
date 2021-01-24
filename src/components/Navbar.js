@@ -4,24 +4,14 @@ import IconButton from "@material-ui/core/IconButton"
 import { makeStyles } from "@material-ui/core/styles"
 import Toolbar from "@material-ui/core/Toolbar"
 import Menu from "@material-ui/icons/Menu"
-import Search from "@material-ui/icons/Search"
-import { navigate } from "@reach/router"
 import classNames from "classnames"
-import React, { useState } from "react"
+import React from "react"
 import styles from "../assets/jss/material-dashboard-react/components/headerStyle.js"
-import Button from "./CustomButtons/Button.js"
-import CustomInput from "./CustomInput/CustomInput.js"
 
 const useStyles = makeStyles(styles)
 
-const Header = (props) => {
+const NavBar = ({ color, handleDrawerToggle }) => {
   const classes = useStyles()
-  const [search, setSearch] = useState("")
-
-  const onChange = (e) => setSearch(e.target.value)
-  const onSearch = () => navigate(`/search/${search}`)
-
-  const { color } = props
   const appBarClasses = classNames({
     [" " + classes[color]]: color,
   })
@@ -30,35 +20,13 @@ const Header = (props) => {
       <Toolbar className={classes.container}>
         <div className={classes.flex} />
         <Hidden smDown implementation="css">
-          <div className={classes.searchWrapper}>
-            <CustomInput
-              onChange={onChange}
-              formControlProps={{
-                className: classes.margin + " " + classes.search,
-              }}
-              inputProps={{
-                placeholder: "Search",
-                inputProps: {
-                  "aria-label": "Search",
-                },
-              }}
-            />
-            <Button
-              color="white"
-              aria-label="edit"
-              justIcon
-              round
-              onClick={onSearch}
-            >
-              <Search />
-            </Button>
-          </div>
+          <div className={classes.searchWrapper} />
         </Hidden>
         <Hidden mdUp implementation="css">
           <IconButton
             color="inherit"
             aria-label="open drawer"
-            onClick={props.handleDrawerToggle}
+            onClick={handleDrawerToggle}
           >
             <Menu />
           </IconButton>
@@ -68,4 +36,4 @@ const Header = (props) => {
   )
 }
 
-export default Header
+export default NavBar

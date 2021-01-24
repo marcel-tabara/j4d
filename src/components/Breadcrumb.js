@@ -1,24 +1,22 @@
-import Breadcrumbs from "@material-ui/core/Breadcrumbs"
-import Link from "@material-ui/core/Link"
+import { Link } from "gatsby"
 import React from "react"
+import * as S from "../components/styles.css"
 
-const Breadcrumb = ({ category, subcategory, categories }) => {
+const Breadcrumb = ({ category, subcategory }) => {
   if (!category) return null
 
   return (
-    <Breadcrumbs aria-label="breadcrumb" className="breadCrumbWrapper">
-      <Link style={{ boxShadow: `none` }} to={`/blog/${category}`}>
+    <S.Category>
+      <Link className="breadcrumb" to={`/blog/${category}`}>
         {category}
       </Link>
+      {" / "}
       {subcategory && (
-        <Link
-          style={{ boxShadow: `none` }}
-          to={`/blog/${category}/${subcategory}`}
-        >
+        <Link className="breadcrumb" to={`/blog/${category}/${subcategory}`}>
           {subcategory}
         </Link>
       )}
-    </Breadcrumbs>
+    </S.Category>
   )
 }
 

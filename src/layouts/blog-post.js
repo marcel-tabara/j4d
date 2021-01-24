@@ -7,29 +7,28 @@ import SEO from "../components/seo"
 import * as S from "../components/styles.css"
 import Main from "./Main"
 import Link from "@material-ui/core/Link"
+import Breadcrumb from "../components/Breadcrumb"
 
 const BlogPostTemplate = (props) => {
   const { prev, next, categories, posts, slug } = props.pageContext
-  const { node } = posts.find((e) => e.node.slug === slug)
+  const {
+    node: { description, title, category, subcategory, created, markdown },
+  } = posts.find((e) => e.node.slug === slug)
 
   return (
     <Main categories={categories}>
-      <SEO title={node.title} description={node.description} />
+      <SEO title={title} description={description} />
       <Container>
-        <S.Title>{node.title}</S.Title>
-        <S.Category>
-          <Link to={`/blog/${node.category}`}>{node.category}</Link>
-          {" / "}
-          <Link to={`/blog/${node.category}/${node.subcategory}`}>
-            {node.subcategory}
-          </Link>
-        </S.Category>
+        <S.Category>{title}</S.Category>
+
+        <Breadcrumb category={category} subcategory={subcategory} />
+
         <div style={{ justifyContent: "flex-end" }}>
-          <S.DateText>{node.created}</S.DateText>
+          <S.DateText>{created}</S.DateText>
         </div>
         <hr />
         <S.BlogContent>
-          <ReactMarkdownWithHtml children={node.markdown} allowDangerousHtml />
+          <ReactMarkdownWithHtml children={markdown} allowDangerousHtml />
         </S.BlogContent>
         <Row>
           {prev && (

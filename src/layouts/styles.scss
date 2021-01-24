@@ -25,7 +25,7 @@
 .date-more {
   display: flex;
   justify-content: space-between;
-  width: '100%';
+  width: "100%";
   align-items: center;
   padding: 1rem;
 }
@@ -81,4 +81,14 @@ div.public-DraftEditor-content {
 .keywords {
   display: flex;
   justify-content: flex-end;
+}
+
+.breadcrumb {
+  cursor: pointer;
+}
+
+.twoCol {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 1rem;
 }

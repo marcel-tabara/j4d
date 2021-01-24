@@ -11,6 +11,26 @@ exports.createPages = ({ graphql, actions: { createPage } }) => {
 
   return graphql(`
     query blogPosts {
+      allMongodbJ4DadminCategories {
+        edges {
+          node {
+            categories {
+              categoryActive
+              categoryId
+              categoryMetaCharset
+              categoryMetaViewport
+              categoryTitle
+              subcategories {
+                subcategoryActive
+                subcategoryId
+                subcategoryMetaCharset
+                subcategoryMetaViewport
+                subcategoryTitle
+              }
+            }
+          }
+        }
+      }
       allMongodbJ4DadminPosts {
         edges {
           node {
@@ -216,10 +236,72 @@ exports.createPages = ({ graphql, actions: { createPage } }) => {
     }
 
     const posts = result.data.allMongodbJ4DadminPosts.edges
+    const gqlCategories =
+      result.data.allMongodbJ4DadminCategories.edges[0].node.categories
     const postsPerPage = 1
     const numPages = Math.ceil(posts.length / postsPerPage)
     const categories = []
     const subcategories = []
+    const activeCategories = []
+
+    // Creating blog posts
+    posts.map((post, index, arr) => {
+      const cat = gqlCategories.find((e) => e.categoryId === post.node.category)
+      const categoryActive = (cat && cat.categoryActive) || false
+      const subcat = cat.subcategories.find(
+        (e) => e.subcategoryId === post.node.subcategory
+      )
+      const subcategoryActive = (subcat && subcat.subcategoryActive) || false
+      const existingActiveCat = activeCategories.some(
+        (e) => e.categoryId === post.node.category
+      )
+
+      categoryActive &&
+        !existingActiveCat &&
+        activeCategories.push({ ...cat, subcategories: [] })
+
+      categoryActive && categories.push(post.node.category)
+      subcategoryActive && subcategories.push(post.node.subcategory)
+
+      const activeCat = activeCategories.find(
+        (e) => e.categoryId === post.node.category
+      )
+
+      const existingActiveSubCat = activeCat.subcategories.some(
+        (e) => e.subcategoryId === post.node.subcategory
+      )
+
+      categoryActive &&
+        subcategoryActive &&
+        !existingActiveSubCat &&
+        activeCat.subcategories.push(subcat)
+
+      const prev = arr[index - 1]
+      const next = arr[index + 1]
+
+      categoryActive &&
+        subcategoryActive &&
+        createPage({
+          path:
+            "blog/" +
+            post.node.category +
+            "/" +
+            post.node.subcategory +
+            "/" +
+            post.node.slug,
+          component: blogLayout,
+          posts,
+          context: {
+            category: post.node.category,
+            subcategory: post.node.subcategory,
+            categories: activeCategories,
+            posts,
+            slug: post.node.slug,
+            prev: prev,
+            next: next,
+          },
+        })
+    })
 
     // Creating blog list with pagination
     Array.from({ length: numPages }).map((_, i) => {
@@ -232,35 +314,7 @@ exports.createPages = ({ graphql, actions: { createPage } }) => {
           currentPage: i + 1,
           numPages,
           posts,
-        },
-      })
-    })
-
-    // Creating blog posts
-    posts.map((post, index, arr) => {
-      categories.push(post.node.category)
-      subcategories.push(post.node.subcategory)
-
-      const prev = arr[index - 1]
-      const next = arr[index + 1]
-
-      createPage({
-        path:
-          "blog/" +
-          post.node.category +
-          "/" +
-          post.node.subcategory +
-          "/" +
-          post.node.slug,
-        component: blogLayout,
-        posts,
-        context: {
-          category: post.node.category,
-          subcategory: post.node.subcategory,
-          posts,
-          slug: post.node.slug,
-          prev: prev,
-          next: next,
+          categories: activeCategories,
         },
       })
     })
@@ -282,6 +336,7 @@ exports.createPages = ({ graphql, actions: { createPage } }) => {
           component: blogCategoryLayout,
           context: {
             category: cat,
+            categories: activeCategories,
             posts,
             limit: postsPerPage,
             skip: i * postsPerPage,
@@ -310,6 +365,7 @@ exports.createPages = ({ graphql, actions: { createPage } }) => {
           path: i === 0 ? link : `${link}/page/${i + 1}`,
           component: blogSubCategoryLayout,
           context: {
+            categories: activeCategories,
             category: cat,
             subcategory: subcat,
             posts,

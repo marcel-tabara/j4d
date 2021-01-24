@@ -64,9 +64,9 @@ const RenderList = ({ node }) => {
       <CardHeader color="primary">
         <Link
           style={{ boxShadow: `none` }}
-          to={`${category}/${subcategory}/${slug}`}
+          to={`/blog/${category}/${subcategory}/${slug}`}
         >
-          <h4 className={classes.cardTitleWhite}>{title}</h4>
+          <h2 className={classes.cardTitleWhite}>{title}</h2>
         </Link>
         <div>{created}</div>
         <Breadcrumb category={category} subcategory={subcategory} />

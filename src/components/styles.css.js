@@ -1,6 +1,18 @@
 import { Link } from "gatsby"
 import styled, { css } from "styled-components"
 
+const infoStyles = css`
+  color: #fff;
+  margin-bottom: 0;
+  font-size: 0.8rem;
+  display: inline-block;
+  margin-right: 2em;
+
+  a {
+    color: inherit;
+  }
+`
+
 export const Footer = styled.footer`
   text-align: center;
   padding: 1em 0;
@@ -11,21 +23,11 @@ export const Article = styled.article`
 `
 
 export const Title = styled.h2`
-  margin-top: 0.5em;
+  margin-top: 1.5em;
   margin-bottom: 0.5em;
+  color: 'red
 `
 
-const infoStyles = css`
-  color: #999;
-  margin-bottom: 0;
-  font-size: 0.8rem;
-  display: inline-block;
-  margin-right: 2em;
-
-  a {
-    color: inherit;
-  }
-`
 export const DateText = styled.p`
   ${infoStyles}
   text-transform: uppercase;
@@ -34,10 +36,8 @@ export const DateText = styled.p`
 
   &:after {
     content: "";
-    width: 1em;
     display: inline-block;
     border-top: 1px solid #ddd;
-    margin-left: 2em;
     position: relative;
     top: -2px;
   }
