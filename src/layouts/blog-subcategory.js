@@ -6,9 +6,16 @@ import renderList from "../components/renderList"
 import Seo from "../components/seo"
 import Main from "./Main"
 
-const BlogSubCategory = ({ pageContext }) => {
-  const { currentPage, numPages, subcategory, categories, posts } = pageContext
-
+const BlogSubCategory = ({
+  pageContext: {
+    currentPage,
+    numPages,
+    category,
+    subcategory,
+    categories,
+    posts,
+  },
+}) => {
   return (
     <Main categories={categories}>
       <Seo title={subcategory} />
@@ -23,7 +30,7 @@ const BlogSubCategory = ({ pageContext }) => {
         <Pagination
           currentPage={currentPage}
           numPages={numPages}
-          contextPage={subcategory}
+          contextPage={`${category.node.category}/${subcategory}`}
         />
       </Container>
     </Main>

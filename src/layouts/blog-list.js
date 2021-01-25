@@ -61,7 +61,7 @@ const IndexPage = ({
       <SEO title="All posts" />
 
       <div style={{ margin: "20px 0 40px" }}>
-        {posts.slice(skip, skip + limit).map((post) => {
+        {posts.map((post) => {
           const {
             id,
             title,
@@ -102,11 +102,7 @@ const IndexPage = ({
             </Card>
           )
         })}
-        <Pagination
-          currentPage={currentPage}
-          numPages={numPages}
-          //contextPage={posts}
-        />
+        <Pagination currentPage={currentPage} numPages={numPages} />
       </div>
     </Main>
   )
