@@ -238,7 +238,7 @@ exports.createPages = ({ graphql, actions: { createPage } }) => {
     const posts = result.data.allMongodbJ4DadminPosts.edges
     const gqlCategories =
       result.data.allMongodbJ4DadminCategories.edges[0].node.categories
-    const postsPerPage = 1
+    const postsPerPage = 2
     const numPages = Math.ceil(posts.length / postsPerPage)
     const categories = []
     const subcategories = []
@@ -305,15 +305,16 @@ exports.createPages = ({ graphql, actions: { createPage } }) => {
 
     // Creating blog list with pagination
     Array.from({ length: numPages }).map((_, i) => {
+      const skip = i * postsPerPage
       createPage({
         path: i === 0 ? `/blog` : `/blog/page/${i + 1}`,
         component: blogListLayout,
         context: {
           limit: postsPerPage,
-          skip: i * postsPerPage,
+          skip,
           currentPage: i + 1,
           numPages,
-          posts,
+          posts: posts.slice(skip, skip + postsPerPage),
           categories: activeCategories,
         },
       })
@@ -331,15 +332,19 @@ exports.createPages = ({ graphql, actions: { createPage } }) => {
       Array.from({
         length: Math.ceil(countCategories[cat] / postsPerPage),
       }).map((_, i) => {
+        const skip = i * postsPerPage
+
         createPage({
           path: i === 0 ? link : `${link}/page/${i + 1}`,
           component: blogCategoryLayout,
           context: {
             category: cat,
             categories: activeCategories,
-            posts,
+            posts: posts
+              .filter((e) => e.node.category === cat)
+              .slice(skip, skip + postsPerPage),
             limit: postsPerPage,
-            skip: i * postsPerPage,
+            skip,
             currentPage: i + 1,
             numPages: Math.ceil(countCategories[cat] / postsPerPage),
           },
@@ -361,6 +366,7 @@ exports.createPages = ({ graphql, actions: { createPage } }) => {
       Array.from({
         length: Math.ceil(countSubCategories[subcat] / postsPerPage),
       }).map((_, i) => {
+        const skip = i * postsPerPage
         createPage({
           path: i === 0 ? link : `${link}/page/${i + 1}`,
           component: blogSubCategoryLayout,
@@ -368,9 +374,15 @@ exports.createPages = ({ graphql, actions: { createPage } }) => {
             categories: activeCategories,
             category: cat,
             subcategory: subcat,
-            posts,
+            posts: posts
+              .filter(
+                (e) =>
+                  e.node.category === cat.node.category &&
+                  e.node.subcategory === subcat
+              )
+              .slice(skip, skip + postsPerPage),
             limit: postsPerPage,
-            skip: i * postsPerPage,
+            skip,
             currentPage: i + 1,
             numPages: Math.ceil(countSubCategories[subcat] / postsPerPage),
           },
