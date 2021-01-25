@@ -8,28 +8,58 @@ import * as S from "../components/styles.css"
 import Main from "./Main"
 import Link from "@material-ui/core/Link"
 import Breadcrumb from "../components/Breadcrumb"
+import Card from "../components/Card/Card.js"
+import CardHeader from "../components/Card/CardHeader.js"
+import { makeStyles } from "@material-ui/core/styles"
+import CardBody from "../components/Card/CardBody.js"
 
-const BlogPostTemplate = (props) => {
-  const { prev, next, categories, posts, slug } = props.pageContext
+const styles = {
+  cardTitleWhite: {
+    color: "#FFFFFF",
+    marginTop: "0px",
+    minHeight: "auto",
+    fontWeight: "300",
+    fontFamily: "'Roboto', 'Helvetica', 'Arial', sans-serif",
+    marginBottom: "3px",
+    textDecoration: "none",
+    fontSize: "1.2rem",
+  },
+}
+
+const useStyles = makeStyles(styles)
+
+const BlogPostTemplate = ({
+  pageContext: { prev, next, categories, posts, slug },
+}) => {
   const {
     node: { description, title, category, subcategory, created, markdown },
   } = posts.find((e) => e.node.slug === slug)
+  const classes = useStyles()
 
   return (
     <Main categories={categories}>
       <SEO title={title} description={description} />
       <Container>
-        <S.Category>{title}</S.Category>
+        <Card>
+          <CardHeader color="primary">
+            <Link
+              style={{ boxShadow: `none`, textDecoration: "none" }}
+              to={`/blog/${category}/${subcategory}/${slug}`}
+            >
+              <h2 className={classes.cardTitleWhite}>{title}</h2>
+            </Link>
+            <div className="twoCol">
+              <Breadcrumb category={category} subcategory={subcategory} />
+              <S.DateText>{created}</S.DateText>
+            </div>
+          </CardHeader>
+          <CardBody>
+            <S.BlogContent>
+              <ReactMarkdownWithHtml children={markdown} allowDangerousHtml />
+            </S.BlogContent>
+          </CardBody>
+        </Card>
 
-        <Breadcrumb category={category} subcategory={subcategory} />
-
-        <div style={{ justifyContent: "flex-end" }}>
-          <S.DateText>{created}</S.DateText>
-        </div>
-        <hr />
-        <S.BlogContent>
-          <ReactMarkdownWithHtml children={markdown} allowDangerousHtml />
-        </S.BlogContent>
         <Row>
           {prev && (
             <Cell xs={6}>

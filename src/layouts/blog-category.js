@@ -15,7 +15,7 @@ const BlogCategory = ({
 
       <Container>
         <hr />
-        <S.HeaderSectionTitle>{category}</S.HeaderSectionTitle>
+        <S.HeaderSectionTitleBlog>{category}</S.HeaderSectionTitleBlog>
         <hr />
         {posts.map(renderList)}
 

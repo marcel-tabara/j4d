@@ -7,6 +7,7 @@ import { makeStyles } from "@material-ui/core/styles"
 import classNames from "classnames"
 import React from "react"
 import styles from "../assets/jss/material-dashboard-react/components/sidebarStyle.js"
+import * as S from "../components/styles.css"
 
 const useStyles = makeStyles(styles)
 
@@ -161,7 +162,9 @@ const Sidebar = (props) => {
           }}
         >
           {brand}
-          <div className={classes.sidebarWrapper}>{links}</div>
+          <div className={classes.sidebarWrapper}>
+            <S.Category>{links}</S.Category>
+          </div>
           {image !== undefined ? (
             <div
               className={classes.background}

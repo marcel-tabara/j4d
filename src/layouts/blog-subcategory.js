@@ -16,7 +16,6 @@ const BlogSubCategory = ({
     posts,
   },
 }) => {
-  console.log("########## category", category)
   return (
     <Main categories={categories}>
       <Seo title={subcategory} />
