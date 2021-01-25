@@ -1,10 +1,10 @@
-import { Row } from "griding"
 import React from "react"
 import { Container } from "../components/grid"
 import Pagination from "../components/pagination"
 import renderList from "../components/renderList"
 import Seo from "../components/seo"
 import Main from "./Main"
+import * as S from "../components/styles.css"
 
 const BlogSubCategory = ({
   pageContext: {
@@ -16,16 +16,17 @@ const BlogSubCategory = ({
     posts,
   },
 }) => {
+  console.log("########## category", category)
   return (
     <Main categories={categories}>
       <Seo title={subcategory} />
 
       <Container>
-        <Row>
-          <h1>{subcategory}</h1>
+        <hr />
+        <S.HeaderSectionTitle>{`${category.node.category} / ${subcategory}`}</S.HeaderSectionTitle>
+        <hr />
 
-          {posts.map(renderList)}
-        </Row>
+        {posts.map(renderList)}
 
         <Pagination
           currentPage={currentPage}

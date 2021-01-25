@@ -83,11 +83,14 @@ export const PaginationItem = styled.li`
 `
 
 export const HeaderSectionTitle = styled.h1`
-  margin-top: 1em;
+  margin-top: 1rem;
+  text-transform: uppercase;
+  font-size: 1rem;
 `
 
 export const HeaderSectionLink = styled(Link)`
   margin-right: 1em;
+  margin-bottom: 1em;
 `
 
 export const HeaderSectionList = styled.div`

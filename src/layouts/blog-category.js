@@ -4,6 +4,7 @@ import Pagination from "../components/pagination"
 import renderList from "../components/renderList"
 import Seo from "../components/seo"
 import Main from "./Main"
+import * as S from "../components/styles.css"
 
 const BlogCategory = ({
   pageContext: { currentPage, numPages, category, categories, posts },
@@ -13,8 +14,9 @@ const BlogCategory = ({
       <Seo title={category} />
 
       <Container>
-        <h1>{category}</h1>
-
+        <hr />
+        <S.HeaderSectionTitle>{category}</S.HeaderSectionTitle>
+        <hr />
         {posts.map(renderList)}
 
         <Pagination
