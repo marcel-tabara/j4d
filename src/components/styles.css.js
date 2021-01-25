@@ -82,10 +82,17 @@ export const PaginationItem = styled.li`
     `}
 `
 
+export const HeaderSectionWrapper = styled.div`
+  background-color: "red";
+  display: flex;
+  justify-content: "center";
+  width: "100%";
+`
+
 export const HeaderSectionTitle = styled.h1`
   margin-top: 1rem;
-  text-transform: uppercase;
   font-size: 1rem;
+  text-transform: uppercase;
 `
 
 export const HeaderSectionLink = styled(Link)`
