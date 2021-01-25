@@ -2,7 +2,7 @@ import React from "react"
 import { Container } from "../components/grid"
 import Pagination from "../components/pagination"
 import renderList from "../components/renderList"
-import Seo from "../components/seo"
+import SEO from "../components/seo"
 import Main from "./Main"
 import * as S from "../components/styles.css"
 
@@ -18,7 +18,7 @@ const BlogSubCategory = ({
 }) => {
   return (
     <Main categories={categories}>
-      <Seo title={subcategory} />
+      <SEO data={subcategory} />
 
       <Container>
         <hr />

@@ -26,13 +26,13 @@ const styles = {
 const useStyles = makeStyles(styles)
 
 const IndexPage = ({
-  pageContext: { categories, posts, currentPage, numPages, skip, limit },
+  pageContext: { categories, posts, currentPage, numPages },
 }) => {
   const classes = useStyles()
 
   return (
     <Main categories={categories}>
-      <SEO title="All posts" />
+      <SEO data="All posts" />
 
       <div style={{ margin: "20px 0 40px" }}>
         {posts.map((post) => {

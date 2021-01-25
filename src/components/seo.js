@@ -1,98 +1,32 @@
-/**
- * SEO component that queries for data with
- *  Gatsby's useStaticQuery React hook
- *
- * See: https://www.gatsbyjs.org/docs/use-static-query/
- */
-
 import React from "react"
-import PropTypes from "prop-types"
-import { Helmet } from "react-helmet"
+import { GatsbySeo } from "gatsby-plugin-next-seo"
 import { useStaticQuery, graphql } from "gatsby"
 
-const SEO = ({ description, lang, meta, keywords, title }) => {
-  const { site } = useStaticQuery(
-    graphql`
-      query {
-        site {
-          siteMetadata {
-            title
-            description
-            author
-          }
-        }
-      }
-    `
-  )
-
-  const metaDescription = description || site.siteMetadata.description
-
+const SEO = (data) => {
   return (
-    <Helmet
-      htmlAttributes={{
-        lang,
+    <GatsbySeo
+      openGraph={{
+        type: "website",
+        url: "https://www.example.com/page",
+        title: "Open Graph Title",
+        description: "Open Graph Description",
+        images: [
+          {
+            url: "https://www.example.ie/og-image.jpg",
+            width: 800,
+            height: 600,
+            alt: "Og Image Alt",
+          },
+          {
+            url: "https://www.example.ie/og-image-2.jpg",
+            width: 800,
+            height: 600,
+            alt: "Og Image Alt 2",
+          },
+        ],
       }}
-      title={title}
-      titleTemplate={`%s | ${site.siteMetadata.title}`}
-      meta={[
-        {
-          name: `description`,
-          content: metaDescription,
-        },
-        {
-          property: `og:title`,
-          content: title,
-        },
-        {
-          property: `og:description`,
-          content: metaDescription,
-        },
-        {
-          property: `og:type`,
-          content: `website`,
-        },
-        {
-          name: `twitter:card`,
-          content: `summary`,
-        },
-        {
-          name: `twitter:creator`,
-          content: site.siteMetadata.author,
-        },
-        {
-          name: `twitter:title`,
-          content: title,
-        },
-        {
-          name: `twitter:description`,
-          content: metaDescription,
-        },
-      ]
-        .concat(
-          keywords.length > 0
-            ? {
-                name: `keywords`,
-                content: keywords.join(`, `),
-              }
-            : []
-        )
-        .concat(meta)}
     />
   )
-}
-
-SEO.defaultProps = {
-  lang: `en`,
-  meta: [],
-  keywords: [],
-}
-
-SEO.propTypes = {
-  description: PropTypes.string,
-  lang: PropTypes.string,
-  meta: PropTypes.array,
-  keywords: PropTypes.arrayOf(PropTypes.string),
-  title: PropTypes.string.isRequired,
 }
 
 export default SEO
