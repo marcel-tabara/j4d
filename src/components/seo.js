@@ -1,31 +1,16 @@
 import React from "react"
-import { GatsbySeo } from "gatsby-plugin-next-seo"
-import { useStaticQuery, graphql } from "gatsby"
+import { Helmet } from "react-helmet"
+// import { traverse } from "../utils/seoUtils"
 
-const SEO = (data) => {
+const SEO = ({ data }) => {
+  console.log("########## data111", data)
+  //const xxx = traverse(data)
+
   return (
-    <GatsbySeo
-      openGraph={{
-        type: "website",
-        url: "https://www.example.com/page",
-        title: "Open Graph Title",
-        description: "Open Graph Description",
-        images: [
-          {
-            url: "https://www.example.ie/og-image.jpg",
-            width: 800,
-            height: 600,
-            alt: "Og Image Alt",
-          },
-          {
-            url: "https://www.example.ie/og-image-2.jpg",
-            width: 800,
-            height: 600,
-            alt: "Og Image Alt 2",
-          },
-        ],
-      }}
-    />
+    <Helmet>
+      <title>title</title>
+      <meta name="description" content="description" />
+    </Helmet>
   )
 }
 

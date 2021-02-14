@@ -4,6 +4,6 @@ export const Container = styled.div`
   flex: 1;
   margin: auto;
   width: 100%;
-  max-width: 70rem;
+  //max-width: 70rem;
   padding: 0 1rem;
 `

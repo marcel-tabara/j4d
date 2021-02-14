@@ -299,6 +299,7 @@ exports.createPages = ({ graphql, actions: { createPage } }) => {
             slug: post.node.slug,
             prev: prev,
             next: next,
+            seo: post.node.seo,
           },
         })
     })

@@ -11,7 +11,7 @@ const BlogCategory = ({
 }) => {
   return (
     <Main categories={categories}>
-      <SEO data={category} />
+      {/* <SEO data={category} /> */}
 
       <Container>
         <hr />

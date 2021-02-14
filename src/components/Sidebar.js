@@ -8,6 +8,7 @@ import classNames from "classnames"
 import React from "react"
 import styles from "../assets/jss/material-dashboard-react/components/sidebarStyle.js"
 import * as S from "../components/styles.css"
+import logo from "../assets/img/logo.png"
 
 const useStyles = makeStyles(styles)
 
@@ -16,7 +17,7 @@ const Sidebar = (props) => {
   const activeRoute = () => false
 
   const {
-    color,
+    color = "infoColor",
     //logo,
     image,
     logoText,
@@ -37,10 +38,10 @@ const Sidebar = (props) => {
         target="_blank"
         rel="noreferrer"
       >
-        {/* <div className={classes.logoImage}>
-          <img src={logo} alt="logo" className={classes.img} />
-        </div> */}
-        {logoText}
+        <div className={classes.logoImage}>
+          <img src={logo} alt="logo" />
+        </div>
+        J4D {logoText}
       </a>
     </div>
   )
@@ -89,15 +90,11 @@ const Sidebar = (props) => {
       </ListItem>
       {cats.map((cat, i) => {
         let listItemClasses = null
-        if (path === "/upgrade-to-pro") {
-          listItemClasses = classNames({
-            [" " + classes[color]]: true,
-          })
-        } else {
-          listItemClasses = classNames({
-            [" " + classes[color]]: activeRoute(),
-          })
-        }
+
+        listItemClasses = classNames({
+          [" " + classes[color]]: activeRoute(),
+        })
+
         const whiteFontClasses = classNames({
           [" " + classes.whiteFont]: activeRoute(),
         })

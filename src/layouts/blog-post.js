@@ -6,7 +6,7 @@ import { Container } from "../components/grid"
 import SEO from "../components/seo"
 import * as S from "../components/styles.css"
 import Main from "./Main"
-import Link from "@material-ui/core/Link"
+import { Link } from "gatsby"
 import Breadcrumb from "../components/Breadcrumb"
 import Card from "../components/Card/Card.js"
 import CardHeader from "../components/Card/CardHeader.js"
@@ -29,16 +29,16 @@ const styles = {
 const useStyles = makeStyles(styles)
 
 const BlogPostTemplate = ({
-  pageContext: { prev, next, categories, posts, slug },
+  pageContext: { prev, next, categories, posts, slug, seo },
 }) => {
   const {
-    node: { description, title, category, subcategory, created, markdown },
+    node: { title, category, subcategory, created, markdown },
   } = posts.find((e) => e.node.slug === slug)
   const classes = useStyles()
 
   return (
     <Main categories={categories}>
-      <SEO title={title} description={description} />
+      {/* <SEO data={seo} /> */}
       <Container>
         <Card>
           <CardHeader color="primary">
