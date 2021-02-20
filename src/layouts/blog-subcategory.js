@@ -14,11 +14,12 @@ const BlogSubCategory = ({
     subcategory,
     categories,
     posts,
+    seo,
   },
 }) => {
   return (
     <Main categories={categories}>
-      <SEO data={subcategory} />
+      <SEO data={seo} />
 
       <Container>
         <hr />

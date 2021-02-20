@@ -180,7 +180,6 @@ const sidebarStyle = (theme) => ({
   selectedItemText: {
     ...defaultFont,
     margin: "0",
-    lineHeight: "30px",
     fontSize: "14px",
     color: whiteColor,
     background: "linear-gradient(60deg, #26c6da, #00acc1)",

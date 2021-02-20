@@ -7,11 +7,11 @@ import Main from "./Main"
 import * as S from "../components/styles.css"
 
 const BlogCategory = ({
-  pageContext: { currentPage, numPages, category, categories, posts },
+  pageContext: { currentPage, numPages, category, categories, posts, seo },
 }) => {
   return (
     <Main categories={categories}>
-      {/* <SEO data={category} /> */}
+      <SEO data={seo} />
 
       <Container>
         <hr />

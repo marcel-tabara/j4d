@@ -38,7 +38,7 @@ const BlogPostTemplate = ({
 
   return (
     <Main categories={categories}>
-      {/* <SEO data={seo} /> */}
+      <SEO data={seo} />
       <Container>
         <Card>
           <CardHeader color="primary">

@@ -4,12 +4,13 @@ import { Helmet } from "react-helmet"
 
 const SEO = ({ data }) => {
   console.log("########## data111", data)
-  //const xxx = traverse(data)
+  const { title, meta } = data
 
   return (
     <Helmet>
-      <title>title</title>
-      <meta name="description" content="description" />
+      {title && <title>{title}</title>}
+      {meta.length > 0 &&
+        meta.map((e) => <meta property={e.name} content={e.content} />)}
     </Helmet>
   )
 }

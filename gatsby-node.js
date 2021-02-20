@@ -26,6 +26,56 @@ exports.createPages = ({ graphql, actions: { createPage } }) => {
                 subcategoryMetaCharset
                 subcategoryMetaViewport
                 subcategoryTitle
+                seoSub {
+                  defaultTitle
+                  defer
+                  encodeSpecialCharacters
+                  title
+                  titleTemplate
+                  titleAttributes {
+                    itemprop
+                  }
+                  meta {
+                    name
+                    content
+                  }
+                  htmlAttributes {
+                    lang
+                    amp
+                  }
+                  bodyAttributes {
+                    className
+                  }
+                  base {
+                    href
+                    target
+                  }
+                }
+              }
+              seo {
+                titleTemplate
+                titleAttributes {
+                  itemprop
+                }
+                title
+                meta {
+                  content
+                  name
+                }
+                htmlAttributes {
+                  amp
+                  lang
+                }
+                encodeSpecialCharacters
+                defer
+                defaultTitle
+                bodyAttributes {
+                  className
+                }
+                base {
+                  href
+                  target
+                }
               }
             }
           }
@@ -38,186 +88,28 @@ exports.createPages = ({ graphql, actions: { createPage } }) => {
             category
             subcategory
             seo {
-              allSeoProps_defer
-              allSeoProps_noindex
-              allSeoProps_nofollow
-              allSeoProps_dangerouslySetAllPagesToNoIndex
-              allSeoProps_dangerouslySetAllPagesToNoFollow
-              allSeoProps_language
-              allSeoProps_title
-              allSeoProps_titleTemplate
-              allSeoProps_description
-              allSeoProps_canonical
-              allSeoProps_mobileAlternate {
-                media
-                href
+              titleTemplate
+              titleAttributes {
+                itemprop
               }
-              allSeoProps_languageAlternates {
-                href
-                hrefLang
-              }
-              allSeoProps_defaultOpenGraphImageWidth
-              allSeoProps_defaultOpenGraphImageHeight
-              allSeoProps_defaultOpenGraphVideoWidth
-              allSeoProps_defaultOpenGraphVideoHeight
-              allSeoProps_linkTags {
-                link
-              }
-              faqJsonLdProps_questions {
-                answer
-                question
-              }
-              logoJsonLdProps_logo
-              logoJsonLdProps_url
-              productJsonLdProps_productName
-              productJsonLdProps_name
-              productJsonLdProps_description
-              productJsonLdProps_brand
-              productJsonLdProps_images
-              productJsonLdProps_reviews {
-                author
-                datePublished
-                name
-                reviewBody
-                reviewRating {
-                  bestRating
-                  worstRating
-                  ratingValue
-                }
-              }
-              productJsonLdProps_offers {
-                price
-                priceCurrency
-                priceValidUntil
-                itemCondition
-                availability
-                url
-                seller {
-                  type
-                  name
-                }
-              }
-              productJsonLdProps_offersType
-              productJsonLdProps_gtin
-              productJsonLdProps_gtin8
-              productJsonLdProps_gtin12
-              productJsonLdProps_gtin13
-              productJsonLdProps_gtin14
-              productJsonLdProps_mpn
-              productJsonLdProps_sku
-              socialProfileJsonLdProps_defer
-              socialProfileJsonLdProps_type
-              socialProfileJsonLdProps_name
-              socialProfileJsonLdProps_url
-              socialProfileJsonLdProps_sameAs
-              localBusinessAddress_addressCountry
-              localBusinessAddress_addressLocality
-              localBusinessAddress_addressRegion
-              localBusinessAddress_postalCode
-              localBusinessAddress_postOfficeBoxNumber
-              localBusinessAddress_streetAddress
-              corporateContactJsonLdProps_defer
-              corporateContactJsonLdProps_url
-              corporateContactJsonLdProps_logo
-              corporateContactJsonLdProps_contactPoint {
-                areaServed
-                availableLanguage
-                contactOption
-                contactType
-                telephone
-              }
-              breadcrumbJsonLdProps_itemListElements {
-                name
-                position
-                item
-              }
-              blogJsonLdProps_title
-              blogJsonLdProps_url
-              blogJsonLdProps_datePublished
-              blogJsonLdProps_dateModified
-              blogJsonLdProps_authorName
-              blogJsonLdProps_authorType
-              blogJsonLdProps_description
-              blogJsonLdProps_publisherName
-              blogJsonLdProps_publisherLogo
-              blogJsonLdProps_headline
-              blogJsonLdProps_keywords
-              blogJsonLdProps_images
-              blogJsonLdProps_posts {
-                datePublished
-                headline
-                image
-              }
-              blogJsonLdProps_issn
-              allSeoProps_twitter {
-                cardType
-                handle
-                site
-              }
-              productJsonLdProps_aggregateRating {
-                ratingExplanation
-                reviewAspect
-                ratingCount
-                reviewCount
-                bestRating
-                ratingValue
-                worstRating
-              }
-              allSeoProps_facebook {
-                appId
-              }
-              allSeoProps_metaTags {
+              title
+              meta {
                 content
                 name
-                property
               }
-              allSeoProps_openGraph {
-                article {
-                  authors
-                  expirationTime
-                  modifiedTime
-                  publishedTime
-                  section
-                  tags
-                }
-                book {
-                  authors
-                  isbn
-                  releaseDate
-                  tags
-                }
-                defaultImageHeight
-                defaultImageWidth
-                description
-                images {
-                  alt
-                  height
-                  url
-                  width
-                }
-                locale
-                profile {
-                  firstName
-                  gender
-                  lastName
-                  username
-                }
-                site_name
-                title
-                type
-                url
-                video {
-                  actors {
-                    profile
-                    role
-                  }
-                  directors
-                  duration
-                  releaseDate
-                  series
-                  tags
-                  writers
-                }
+              htmlAttributes {
+                amp
+                lang
+              }
+              encodeSpecialCharacters
+              defer
+              defaultTitle
+              bodyAttributes {
+                className
+              }
+              base {
+                href
+                target
               }
             }
             created(formatString: "MMMM DD, YYYY")
@@ -329,6 +221,7 @@ exports.createPages = ({ graphql, actions: { createPage } }) => {
 
     categories.map((cat, i) => {
       const link = `/blog/${cat}`
+      const seo = gqlCategories.find((e) => e.categoryId === cat).seo
 
       Array.from({
         length: Math.ceil(countCategories[cat] / postsPerPage),
@@ -340,6 +233,7 @@ exports.createPages = ({ graphql, actions: { createPage } }) => {
           component: blogCategoryLayout,
           context: {
             category: cat,
+            seo,
             categories: activeCategories,
             posts: posts
               .filter((e) => e.node.category === cat)
@@ -363,6 +257,9 @@ exports.createPages = ({ graphql, actions: { createPage } }) => {
     allSubCategories.map((subcat, i) => {
       const cat = posts.find((e) => e.node.subcategory === subcat)
       const link = `/blog/${cat.node.category}/${subcat}`
+      const seo = gqlCategories
+        .find((e) => e.categoryId === cat.node.category)
+        .subcategories.find((e) => e.subcategoryId === subcat).seoSub
 
       Array.from({
         length: Math.ceil(countSubCategories[subcat] / postsPerPage),
@@ -375,6 +272,7 @@ exports.createPages = ({ graphql, actions: { createPage } }) => {
             categories: activeCategories,
             category: cat,
             subcategory: subcat,
+            seo,
             posts: posts
               .filter(
                 (e) =>
