@@ -32,7 +32,7 @@ const IndexPage = ({
 
   return (
     <Main categories={categories}>
-      {/* <SEO data={"All posts"} /> */}
+      <SEO data={{ title: "All posts" }} />
 
       <div style={{ margin: "20px 0 40px" }}>
         {posts.map((post) => {

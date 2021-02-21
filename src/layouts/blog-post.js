@@ -54,9 +54,11 @@ const BlogPostTemplate = ({
             </div>
           </CardHeader>
           <CardBody>
-            <S.BlogContent>
-              <ReactMarkdownWithHtml children={markdown} allowDangerousHtml />
-            </S.BlogContent>
+            <ReactMarkdownWithHtml
+              children={markdown}
+              allowDangerousHtml
+              className="container"
+            />
           </CardBody>
         </Card>
 
@@ -67,10 +69,8 @@ const BlogPostTemplate = ({
                 to={`/blog/${prev.node.category}/${prev.node.subcategory}/${prev.node.slug}`}
               >
                 <S.NavigationPost>
-                  <div>
-                    {" "}
-                    {"<"} {prev.node.title}
-                  </div>
+                  {" "}
+                  {"<"} {prev.node.title}
                 </S.NavigationPost>
               </Link>
             </Cell>
@@ -82,10 +82,8 @@ const BlogPostTemplate = ({
                 to={`/blog/${next.node.category}/${next.node.subcategory}/${next.node.slug}`}
               >
                 <S.NavigationPost>
-                  <div>
-                    {" "}
-                    {next.node.title} {">"}
-                  </div>
+                  {" "}
+                  {next.node.title} {">"}
                 </S.NavigationPost>
               </Link>
             </Cell>
